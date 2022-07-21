@@ -11,7 +11,6 @@ class users(models.Model):
     LastName = models.CharField(max_length=250)
     UserMail = models.EmailField(max_length=100)
     Password = models.CharField(max_length=15)
-    ConfirmPassword = models.CharField(max_length=15)
     image = models.FileField()
 
 class blogs(models.Model):
@@ -24,4 +23,4 @@ class blogs(models.Model):
 class UserForm(ModelForm):
     class Meta:
         model = users
-        fields = ["FirstName","LastName","UserMail","Password","ConfirmPassword",'image']
+        fields = ["FirstName","LastName","UserMail","Password","image"]
