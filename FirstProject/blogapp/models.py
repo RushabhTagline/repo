@@ -19,6 +19,7 @@ class blogs(models.Model):
     description = models.CharField(max_length=1000)
     pub_date = models.DateTimeField('Date published')
     image = models.FileField()
+    # UserId = models.ForeignKey(users,on_delete=mode)
 
 class UserForm(ModelForm):
     class Meta:

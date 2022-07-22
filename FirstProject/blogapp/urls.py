@@ -10,4 +10,5 @@ urlpatterns = [
     path('ragi/',views.RegistrationPage,name='RegistrationPage'),
     path('Logout/',views.logout,name='logout'),
     path('blogspage/',views.Blogspage,name='Blogspage'),
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

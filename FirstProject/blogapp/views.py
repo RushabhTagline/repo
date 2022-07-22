@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from blogapp.models import UserForm
 
-from blogapp.models import users, blogs
+from blogapp.models import users, Blogs
 
 # Create your views here.
 
@@ -25,15 +25,14 @@ def RegistrationPage(request):
         data = UserForm(request.POST,request.FILES)
         data.save()
         return redirect('/loginpage')
-
     return render(request,'registration.html',{'frm':frm})
 
 def loginpage(request):
     msg = ""
     if 'login' in request.POST:
         Email = request.POST['mail']
-        password = request.POST['password']
-        data = users.objects.filter(UserMail=Email,Password = password)
+        Password = request.POST['password']
+        data = users.objects.filter(UserMail=Email,Password = Password)
         if (data.count()==0):
             msg = "Invalid Email OR Password";          
         else:
@@ -48,6 +47,6 @@ def logout(request):
     return redirect('/')
 
 def Blogspage(request):
-    blog = blogs.objects.all()
+    blog = Blogs.objects.all()
     return render(request,'blogs.html',{'blogs':blog})
     
