@@ -1,23 +1,24 @@
-import email
-import logging
 from urllib import request
-from xml.dom.minidom import Document
+from webbrowser import get
 from django.template import loader
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from blogapp.models import UserForm
-
-from blogapp.models import users, Blogs
+from django.shortcuts import redirect, render 
+from blogapp.models import UserForm, BlogForm
+from blogapp.models import users, blogs
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # Create your views here.
 
 def indexpage(request):
     User = 0
+    image = ""
     if 'User_id' in request.session:
         user = request.session['User_id']
+        data = users.objects.filter(id=user).get()
         User = user
+        image = data.image
     text = "Hello..!",
-    return render(request,'index.html',{'text':text,'id':User})
+    return render(request,'index.html',{'text':text,'id':User,'image':image})
 
 def RegistrationPage(request):
     frm = UserForm  
@@ -38,7 +39,7 @@ def loginpage(request):
         else:
             user = data.get();
             user_id = user.id
-            request.session['User_id']= user_id
+            request.session['User_id'] = user_id
             return redirect('/')
     return render(request,'login.html',{'msg':msg})
 
@@ -47,6 +48,22 @@ def logout(request):
     return redirect('/')
 
 def Blogspage(request):
-    blog = Blogs.objects.all()
-    return render(request,'blogs.html',{'blogs':blog})
-    
+    if 'User_id' in request.session:
+        user = request.session['User_id']
+        data = users.objects.filter(id=user).get()
+        image = data.image
+    blog = blogs.objects.all().order_by('-id')
+    paginator = Paginator(blog, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request,'blogs.html',{'blogs':page_obj,"image":image})
+
+def AddNewBlog(request):
+    frm = BlogForm  
+    if 'save' in request.POST:
+        UserId = request.session['User_id']
+        data = BlogForm(request.POST,request.FILES)
+        data.save()
+        return redirect('/blogspage')
+    return render(request,'AddBlog.html',{'frm':frm})

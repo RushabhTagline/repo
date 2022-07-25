@@ -12,9 +12,9 @@ class Migration(migrations.Migration):
 
     operations = [
         # migrations.AddField(
-            # model_name='blogs',
-            # name='UserId',
-            # field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='blogapp.users'),
-            # preserve_default=False,
+        #     model_name='blogs',
+        #     name='UserId',
+        #     field=models.ForeignKey(default='', on_delete=django.db.models.deletion.CASCADE, to='blogapp.users'),
+        #     preserve_default=False,
         # ),
     ]
