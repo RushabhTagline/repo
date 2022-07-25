@@ -38,7 +38,7 @@
                         <span class="fs-5 d-none d-sm-inline">Demo Site</span>
                     </a>
                     {% if id %}
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <ul id="menu">
                         <li class="nav-item">
                             <a href="/" class="nav-link align-middle px-0">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
@@ -51,15 +51,15 @@
                         </li>
                         <li>
                             <a href="/blogspage" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">List of all Blog posts</span> </a>
+                                List of all Blog posts</a>
                         </li>
                         <li>
                             <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Blog author detail page</span></a>
+                                Blog author detail page</a>
                         </li>
                         <li>
                             <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Blog post detail page</span></a>
+                                Blog post detail page</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -68,18 +68,18 @@
             </div>
             <div class="col py-3">
                  <!-- Navbar -->
-                <header class="p-3 bg-dark text-white">
-                    <div class="container">
+                <header class="p-3 text-black">
+                    <div class="container bg-light  ">
                         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                             <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                                 <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
                             </a>
                     
-                            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                                <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-                                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" >
+                                <li><a href="#" class="nav-link px-2 text-black">Home</a></li> 
+                                <li><a href="#" class="nav-link px-2 text-black">Pricing</a></li>
+                                <li><a href="#" class="nav-link px-2 text-black">FAQs</a></li>
+                                <li><a href="#" class="nav-link px-2 text-black">About</a></li>
                             </ul>
                     
                             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -87,18 +87,19 @@
                             </form>
                             {% if not id %}
                             <div class="text-end">
-                                <a href="/loginpage"><button type="button" class="btn btn-outline-light me-2"> Login</button></a>
+                                <a href="/loginpage"><button type="button" class="btn btn-outline-dark me-2"> Login</button></a>
                                 <a href="/ragi"><button type="button" class="btn btn-warning">Sign-up</button></a>
                             </div>
                             {% else %}
                             <div class="text-end">
-                                <a href="/Logout"><button type="button" class="btn btn-outline-light me-2"> Logout</button></a>
+                                <a href="/Logout"><button type="button" class="btn btn-outline-dark me-2"> Logout</button></a>
                                 <img src="/media/{{image}}" alt="" id="profile-pic">
                             </div> 
                             {% endif %}                          
                         </div>
                     </div>
                 </header>
+                <!-- End Header -->
             </div>
         </div>
     </div>

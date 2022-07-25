@@ -54,8 +54,8 @@ def Blogspage(request):
         image = data.image
     blog = blogs.objects.all().order_by('-id')
     paginator = Paginator(blog, 4)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_num = request.GET.get('page')
+    page_obj = paginator.get_page(page_num)
 
     return render(request,'blogs.html',{'blogs':page_obj,"image":image})
 
