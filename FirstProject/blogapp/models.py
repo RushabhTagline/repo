@@ -1,9 +1,7 @@
-from dataclasses import field, fields
+from pyexpat import model
 from django.utils import timezone
-import email
-from email.mime import image
 from django.db import models
-from django.forms import ModelForm, PasswordInput
+from django.forms import ModelForm
 
 # Create your models here.
 
@@ -14,16 +12,26 @@ class users(models.Model):
     Password = models.CharField(max_length=15)
     image = models.FileField()
     def __str__(self):
-        return self.FirstName + self.LastName + '(' + self.UserMail + ')'
+        return self.FirstName   
 
 class blogs(models.Model):
     title = models.CharField(max_length=100)
     sub_title = models.CharField(max_length=300)
     description = models.CharField(max_length=1000)
     image = models.FileField()
+    created_date = models.DateTimeField('date created', default=timezone.now)
     UserId = models.ForeignKey(users,on_delete=models.CASCADE)
     def __str__(self):
         return self.title 
+
+class comment(models.Model):
+    Comment = models.CharField(max_length=400)
+    create_at = models.DateTimeField('Date created')
+    BlogId = models.ForeignKey(blogs,on_delete=models.CASCADE)
+    user_id = models.ForeignKey(users,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.Comment
+
 
 class UserForm(ModelForm):
     class Meta:

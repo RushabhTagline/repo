@@ -30,76 +30,64 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Demo Site</span>
-                    </a>
-                    {% if id %}
-                    <ul id="menu">
-                        <li class="nav-item">
-                            <a href="/" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/AddBlog" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Add Blog</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/blogspage" class="nav-link px-0 align-middle">
-                                List of all Blog posts</a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                Blog author detail page</a>
-                        </li>
-                        <li>
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                Blog post detail page</a>
-                        </li>
-                        {% endif %}
+    <div class="container">
+        <!-- Start Header -->
+        <header class="p-3 text-black">
+            <div class="container bg-light  ">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" >
+                        <li><a href="/blog" class="nav-link px-2 text-black">Home</a></li> 
+                        <li><a href="/blog" class="nav-link px-2 text-black">Pricing</a></li>
+                        <li><a href="/blog" class="nav-link px-2 text-black">FAQs</a></li>
+                        <li><a href="/blog" class="nav-link px-2 text-black">About</a></li>
                     </ul>
-                    <hr>
+            
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                    </form>
+                    {% if not id %}
+                    <div class="text-end">
+                        <a href="/blog/loginpage"><button type="button" class="btn btn-outline-dark me-2"> Login</button></a>
+                        <a href="/blog/ragi"><button type="button" class="btn btn-warning">Sign-up</button></a>
+                    </div>
+                    {% else %}
+                    <div class="text-end">
+                        <a href="/blog/Logout"><button type="button" class="btn btn-outline-dark me-2"> Logout</button></a>
+                        <img src="/media/{{image}}" alt="" id="profile-pic">
+                    </div> 
+                    {% endif %}                          
                 </div>
             </div>
+        </header>
+        <!-- End Header -->
+    </div>
+        <a href="/blog" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-5 d-none d-sm-inline">Demo Site</span>
+        </a>
+        {% if id %}
+        <ul id="menu">
+            <li class="nav-item">
+                <a href="/blog" class="nav-link align-middle px-0"><span class="ms-1 d-none d-sm-inline">Home</span></a>
+            </li>
+            <li class="nav-item">
+                <a href="/blog/AddBlog" class="nav-link align-middle px-0"><span class="ms-1 d-none d-sm-inline">Add Blog</span></a>
+            </li>
+            <li>
+                <a href="/blog/blogspage" class="nav-link px-0 align-middle">List of all Blog posts</a>
+            </li>
+            <li>
+                <a href="/blog/AuthorDetailsPage/{{UserId}}" class="nav-link px-0 align-middle">blogger detail page</a>
+            </li>
+            <li>
+                <a href="/blog/bloggers" class="nav-link px-0 align-middle ">Blog post detail page</a>
+            </li> 
+        </ul>
+            {% endif %}
+        </div>
+            </div>
             <div class="col py-3">
-                 <!-- Navbar -->
-                <header class="p-3 text-black">
-                    <div class="container bg-light  ">
-                        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-                            </a>
-                    
-                            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" >
-                                <li><a href="#" class="nav-link px-2 text-black">Home</a></li> 
-                                <li><a href="#" class="nav-link px-2 text-black">Pricing</a></li>
-                                <li><a href="#" class="nav-link px-2 text-black">FAQs</a></li>
-                                <li><a href="#" class="nav-link px-2 text-black">About</a></li>
-                            </ul>
-                    
-                            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-                            </form>
-                            {% if not id %}
-                            <div class="text-end">
-                                <a href="/loginpage"><button type="button" class="btn btn-outline-dark me-2"> Login</button></a>
-                                <a href="/ragi"><button type="button" class="btn btn-warning">Sign-up</button></a>
-                            </div>
-                            {% else %}
-                            <div class="text-end">
-                                <a href="/Logout"><button type="button" class="btn btn-outline-dark me-2"> Logout</button></a>
-                                <img src="/media/{{image}}" alt="" id="profile-pic">
-                            </div> 
-                            {% endif %}                          
-                        </div>
-                    </div>
-                </header>
-                <!-- End Header -->
+                
             </div>
         </div>
     </div>

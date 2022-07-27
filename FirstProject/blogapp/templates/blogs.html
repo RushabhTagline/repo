@@ -8,115 +8,63 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <style>
-        /* Default height for small devices */
-        #intro-example {
-            height: 400px;
+        .Tab-set{
+            height: 30%;
+            width: auto;
+            margin-left: 20px;
+            margin-top: 20px;
+        }   
+        body{
+            width: 28%;
         }
-
-        /* Height for devices larger than 992px */
-        @media (min-width: 992px) {
-            #intro-example {
-                height: 600px;
-            }
+        table tr td{
+            border: 2px solid black;
         }
-        #profile-pic
-        {
-            height: 50px;
-            width: 50px;
-            border-radius: 25px;
-            margin-right: 2px;
-            margin-left: 5px;
+        table tr th{
+            border: 2px solid black;
+        }
+        .image-set{
+            height: 70px;
+            width: 80px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .tr-set{
+            margin: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        <span class="fs-5 d-none d-sm-inline">Demo Site</span>
-                    </a>
-                    {% if id %}
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/blogspage" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">List of all Blog posts</span> </a>
-                        </li>
-                        <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Blog author detail page</span></a>
-                        </li>
-                        <li>
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Blog post detail page</span></a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                    <hr>
-                </div>
-            </div>
-            <div class="col py-3">
-                 <!-- Navbar -->
-                <header class="p-3 bg-dark text-white">
-                    <div class="container">
-                        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-                            </a>
-                    
-                            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                                <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-                                {% if id  %}
-                                <li><a href="/AddBlog" class="nav-link px-2 text-white">Add Blog</a></li>
-                                {% endif %}
-                                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-                            </ul>
-                    
-                            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-                            </form>
-                            {% if 'User_Id' in request.session %}
-                            <div class="text-end">
-                                <a href="/loginpage"><button type="button" class="btn btn-outline-light me-2"> Login</button></a>
-                                <a href="/ragi"><button type="button" class="btn btn-warning">Sign-up</button></a>
-                            </div>
-                            {% else %}
-                            <div class="text-end">
-                                <a href="/Logout"><button type="button" class="btn btn-outline-light me-2"> Logout</button></a>
-                                <img src="/media/{{image}}" alt="" id="profile-pic">
-                            </div> 
-                            {% endif %}                          
-                        </div>
-                    </div>
-                </header>
-                <div class="row mb-2">
-                    {% for x in blogs %}
-                    <div class="col-md-6">
-                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                            <div class="col p-4 d-flex flex-column position-static">
-                                <strong class="d-inline-block mb-2 text-primary">{{x.title}}</strong>
-                                <h3 class="mb-0">{{x.sub_title}}</h3>
-                                <div class="mb-1 text-muted">{{x.pub_date}}</div>
-                                <p class="card-text mb-auto">{{x.description}}</p>
-                                <a href="#" class="stretched-link">Continue reading</a>
-                            </div>
-                            <div class="col-auto d-none d-lg-block">
-                                <div><img src="/media/{{x.image}}" alt=""></div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+    <div><a href="/blog" style="margin-left: 20px;">Home</a></div><br>
+    <div>
+        <table border="4" align="left" class="Tab-set">
+            <tr align="center">
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publish Date</th>
+                <th>Image</th>
+            </tr>
+            {% for x in page_obj %}
+            <tr align="center" class="tr-set">
+                <td><a href="/blog/blogdetails/{{x.id}}">{{x.title}}</a></td>
+                <td>{{x.UserId}}</td>
+                <td>{{x.created_date}}</td>
+                <td><img src="/media/{{x.image}}" class="image-set" alt=""></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
     </div>
 </body>
 </html>
