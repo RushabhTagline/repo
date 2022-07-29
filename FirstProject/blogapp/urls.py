@@ -14,5 +14,7 @@ urlpatterns = [
     path('blogdetails/<int:blog_id>',views.BlogDetailsPage,name='BlogDetailsPage'),
     path('AuthorDetailsPage/<int:pk>',views.AuthorDetailsPage,name='AuthorDetailsPage'),
     path('bloggers/',views.BloggersPage,name='BloggersPage'),
+    path('addcomment/<int:blog_id>',views.addcomment,name='addcomment'),
+    path('verificationpage/',views.VerificationPage,name="VerificationPage"),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

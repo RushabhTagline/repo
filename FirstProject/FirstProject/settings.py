@@ -139,3 +139,14 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'rushabh.tagline@gmail.com'
+EMAIL_HOST_PASSWORD = 'xokwqfskfexwcvic'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'rushabh.tagline@gmail.com'

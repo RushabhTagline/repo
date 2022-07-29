@@ -8,9 +8,10 @@ from django.forms import ModelForm
 class users(models.Model):
     FirstName = models.CharField(max_length=250)
     LastName = models.CharField(max_length=250)
-    UserMail = models.EmailField(max_length=100)
+    UserMail = models.EmailField(max_length=100,unique=True)
     Password = models.CharField(max_length=15)
     image = models.FileField()
+    otp = models.IntegerField(max_length=6,blank=True,null=True)
     def __str__(self):
         return self.FirstName   
 
@@ -25,7 +26,7 @@ class blogs(models.Model):
         return self.title 
 
 class comment(models.Model):
-    Comment = models.CharField(max_length=400)
+    Comment = models.CharField(max_length=2000)
     create_at = models.DateTimeField('Date created')
     BlogId = models.ForeignKey(blogs,on_delete=models.CASCADE)
     user_id = models.ForeignKey(users,on_delete=models.CASCADE)

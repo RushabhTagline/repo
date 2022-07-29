@@ -22,35 +22,28 @@
 </head>
 <body>
     <div><a href="/blog" style="margin-left: 20px;">Home</a></div><br>
-    <div class="row mb-2 ">
-        <div class="col-md-auto align-items-center">
+    <div class="row mb-2">
+        <div class="col-md-auto align-items-center" style="margin-left: 20px;">
             <div class="row g-0 border rounded row-md-auto"  id="page-set">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <a href="/blog/AuthorDetailsPage/{{pk}}"><strong class="d-inline-block mb-2 text-primary">{{data.UserId}}</strong></a>
-                    <h3 class="mb-0">{{data.title}}</h3>
+                    <a href="/blog/AuthorDetailsPage/{{pk}}"><p class="d-inline-block mb-2 text-primary">{{data.UserId}}</p></a>
+                    <h6 class="mb-0">{{data.title}}</h6>
                     <img src="/media/{{data.image}}" class="image-set" alt="">
                     <h4 class="mb-0">{{data.sub_title}}</h4>
                     <p class="card-text mb-auto">{{data.description}}</p>
                     <div class="mb-1 text-muted">{{data.created_date}}</div>
-                </div>  
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <div>
-                        <label for="for_comment">Comment </label>
-                        <input type="text" name="CommentInput" placeholder="Add New Comment">
-                        <input type="submit" value="Post" name="post" >
-                    </div>
-                </form>
-                {% for data in comments %}
-                <div><hr>
-                    <p>{{data.user_id}}</p>
-                    <h6>{{data.Comment}}</h6    >
+                </div> 
+                <a href="/blog/addcomment/{{data.id}}" style="margin-left: 10px;">Add a new comment</a> 
+                <div style="margin-left: 10px;">
+                    {% for data in comments %}
+                    <hr><p>{{data.user_id}}</p>
+                    <p>{{data.Comment}}</p>
                     <p>{{data.create_at}}</p>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
     </div>
-    <div><a href="/blog/blogspage">Back</a></div>
+    <div style="margin-left: 20px;"><a href="/blog/blogspage">Back</a></div>
 </body>
 </html>

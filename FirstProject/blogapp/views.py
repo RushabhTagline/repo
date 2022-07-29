@@ -1,8 +1,8 @@
-from xml.etree.ElementTree import Comment
+from random import randint
 from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.urls import is_valid_path
+from django.core.mail import send_mail
 from django.utils import timezone
 from .models import UserForm, BlogForm
 from .models import users, blogs, comment  
@@ -25,7 +25,7 @@ def RegistrationPage(request):
         data = UserForm(request.POST,request.FILES)
         if data.is_valid():   
             data.save()
-            return redirect('/loginpage')
+            return redirect('/blog/loginpage')
     return render(request,'registration.html',{'frm':frm})
 
 def loginpage(request):
@@ -34,13 +34,21 @@ def loginpage(request):
         email = request.POST['mail']
         password = request.POST['password']
         data = users.objects.filter(UserMail=email, Password=password)
-        if (data.count()==0):
+        
+        if not data:
             msg = "Invalid Email OR Password";          
         else:
-            user = data.get();
-            user_id = user.id
-            request.session['User_id'] = user_id
-            return redirect('/')
+            request.session['email'] = email 
+            otp = randint(100000,999999)
+            send_mail(
+                'This is my subject',
+                'OTP is : '+str(otp),
+                'rushabh.tagline@gmail.com',
+                ['' +str(email)],
+                fail_silently=False,
+            )
+            data.update(otp=otp)
+            return redirect('/verificationpage')
     return render(request,'login.html',{'msg':msg})
 
 def logout(request):
@@ -64,18 +72,29 @@ def AddNewBlog(request):
     return render(request, 'AddBlog.html',{'frm':frm})
 
 def BlogDetailsPage(request,blog_id):
+    if 'Blog_id' in request.session:
+        del request.session['Blog_id']
     data = blogs.objects.filter(id=blog_id).get()
     pk = data.UserId.id
     comments = comment.objects.filter(BlogId=blog_id).order_by('create_at')
-    
-    if 'post' in request.POST:
-        comments = request.POST['CommentInput']  
-        userid = users.objects.filter(id=request.session['User_id']).get()
-        timeat = timezone.now()
-        datasave = comment(Comment=comments, create_at=timeat, BlogId=data, user_id=userid)
-        datasave.save()
-        return redirect('/blog/blogdetails/')
     return render(request, 'Blog-Details.html',{'data':data, 'pk':pk, 'comments':comments})
+
+def addcomment(request,blog_id):
+    if 'Blog_id' in request.session:
+        del request.session['Blog_id']
+    msg = ""
+    if 'User_id' in request.session:
+        data = blogs.objects.filter(id=blog_id).get()
+        if 'post' in request.POST:
+            comments = request.POST['CommentInput']  
+            userid = users.objects.filter(id=request.session['User_id']).get()
+            datasave = comment(Comment=comments, create_at=timezone.now(), BlogId=data, user_id=userid)
+            datasave.save()
+            return redirect(f'/blogdetails/{blog_id}')
+    else:
+        msg = "Please login"    
+        request.session['Blog_id'] = blog_id
+    return render(request,'New-comment.html',{'msg':msg})
     
 def AuthorDetailsPage(request,pk):
     authordata = users.objects.filter(id=pk).get()
@@ -85,4 +104,25 @@ def AuthorDetailsPage(request,pk):
 def BloggersPage(request):
     blogger = users.objects.all()
     return render(request,'bloggers.html',{'bloggers':blogger})
-    
+     
+
+def VerificationPage(request):
+    msg = ""
+    if 'Verified' in request.POST:
+        s_email = request.session['email']
+        userData = users.objects.filter(UserMail = s_email).get()
+        user_enter_otp = request.POST['OTP']
+        if(user_enter_otp != str(userData.otp)):
+            msg = "Invalid otp"
+        else:
+            user_id = userData.id
+            request.session['User_id'] = user_id
+            del request.session['email']
+            if 'Blog_id' in request.session:
+                blog_id = request.session['Blog_id']
+                return redirect(f'/blogdetails/{blog_id}')
+            else:
+                return redirect('/blog')
+    return render(request,'verification.html',{'msg':msg})
+
+
