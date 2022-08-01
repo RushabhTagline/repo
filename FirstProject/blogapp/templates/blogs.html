@@ -15,7 +15,7 @@
             margin-top: 20px;
         }   
         body{
-            width: 28%;
+            width: 24%;
         }
         table tr td{
             border: 2px solid black;
@@ -37,7 +37,7 @@
 <body>
     <div><a href="/blog" style="margin-left: 20px;">Home</a></div><br>
     <div>
-        <table border="4" align="left" class="Tab-set">
+        <table border="4" align="left" class="Tab-set" style="width: auto;">
             <tr align="center">
                 <th>Title</th>
                 <th>Author</th>
@@ -53,7 +53,9 @@
             </tr>
             {% endfor %}
         </table>
-        <br>
+    </div>
+    <div>
+        <br><br><br>
         {% if page_obj.has_previous %}
             <a href="?page=1">&laquo; first</a>
             <a href="?page={{ page_obj.previous_page_number }}">previous</a>

@@ -34,11 +34,9 @@ def loginpage(request):
         email = request.POST['mail']
         password = request.POST['password']
         data = users.objects.filter(UserMail=email, Password=password)
-        
         if not data:
             msg = "Invalid Email OR Password";          
         else:
-            request.session['email'] = email 
             otp = randint(100000,999999)
             send_mail(
                 'This is my subject',
@@ -48,7 +46,7 @@ def loginpage(request):
                 fail_silently=False,
             )
             data.update(otp=otp)
-            return redirect('/verificationpage')
+            return redirect(f'/verificationpage/{email}')
     return render(request,'login.html',{'msg':msg})
 
 def logout(request):
@@ -106,23 +104,19 @@ def BloggersPage(request):
     return render(request,'bloggers.html',{'bloggers':blogger})
      
 
-def VerificationPage(request):
+def VerificationPage(request,email):
     msg = ""
     if 'Verified' in request.POST:
-        s_email = request.session['email']
-        userData = users.objects.filter(UserMail = s_email).get()
+        userData = users.objects.filter(UserMail = email).get()
         user_enter_otp = request.POST['OTP']
         if(user_enter_otp != str(userData.otp)):
             msg = "Invalid otp"
         else:
             user_id = userData.id
             request.session['User_id'] = user_id
-            del request.session['email']
             if 'Blog_id' in request.session:
                 blog_id = request.session['Blog_id']
-                return redirect(f'/blogdetails/{blog_id}')
+                return redirect(f'/addcomment/{blog_id}')
             else:
                 return redirect('/blog')
     return render(request,'verification.html',{'msg':msg})
-
-

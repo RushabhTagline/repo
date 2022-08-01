@@ -11,7 +11,7 @@ class users(models.Model):
     UserMail = models.EmailField(max_length=100,unique=True)
     Password = models.CharField(max_length=15)
     image = models.FileField()
-    otp = models.IntegerField(max_length=6,blank=True,null=True)
+    otp = models.IntegerField(blank=True,null=True)
     def __str__(self):
         return self.FirstName   
 
@@ -31,7 +31,7 @@ class comment(models.Model):
     BlogId = models.ForeignKey(blogs,on_delete=models.CASCADE)
     user_id = models.ForeignKey(users,on_delete=models.CASCADE)
     def __str__(self):
-        return self.Comment
+        return self.Comment[:75]
 
 
 class UserForm(ModelForm):

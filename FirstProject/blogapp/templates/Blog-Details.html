@@ -27,16 +27,16 @@
             <div class="row g-0 border rounded row-md-auto"  id="page-set">
                 <div class="col p-4 d-flex flex-column position-static">
                     <a href="/blog/AuthorDetailsPage/{{pk}}"><p class="d-inline-block mb-2 text-primary">{{data.UserId}}</p></a>
-                    <h6 class="mb-0">{{data.title}}</h6>
                     <img src="/media/{{data.image}}" class="image-set" alt="">
-                    <h4 class="mb-0">{{data.sub_title}}</h4>
+                    <h4 class="mb-0">{{data.title}}</h4>    
+                    <h6 class="mb-0">{{data.sub_title}}</h6>
                     <p class="card-text mb-auto">{{data.description}}</p>
                     <div class="mb-1 text-muted">{{data.created_date}}</div>
                 </div> 
-                <a href="/blog/addcomment/{{data.id}}" style="margin-left: 10px;">Add a new comment</a> 
+                <a href="/blog/addcomment/{{data.id}}" style="margin-left: 10px;">Add a new comment</a> <br>
                 <div style="margin-left: 10px;">
                     {% for data in comments %}
-                    <hr><p>{{data.user_id}}</p>
+                    <hr><a href="/blog/AuthorDetailsPage/{{data.user_id.id}}"><p>{{data.user_id}}</p></a>
                     <p>{{data.Comment}}</p>
                     <p>{{data.create_at}}</p>
                     {% endfor %}
