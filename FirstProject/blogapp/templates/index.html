@@ -40,13 +40,13 @@
                     </form>
                     {% if not id %}
                     <div class="text-end">
-                        <a href="/blog/loginpage"><button type="button"> Login</button></a>
-                        <a href="/blog/ragi"><button type="button">Sign-up</button></a>
+                        <a href="/loginpage"><button type="button"> Login</button></a>
+                        <a href="/ragi"><button type="button">Sign-up</button></a>
                     </div>
                     {% else %}
                     <div class="text-end">
-                        <a href="/blog/Logout"><button type="button"> Logout</button></a>
-                        <a href="/blog/AuthorDetailsPage/{{UserId}}"><img src="/media/{{image}}" alt="" id="profile-pic"></a>
+                        <a href="/Logout"><button type="button"> Logout</button></a>
+                        <a href="/AuthorDetailsPage/{{UserId}}"><img src="/media/{{image}}" alt="" id="profile-pic"></a>
                     </div> 
                     {% endif %}                          
                 </div>
@@ -63,14 +63,14 @@
             </li> -->
             {% if id %}
             <li class="nav-item">
-                <a href="/blog/AddBlog" ><span class="ms-1 d-none d-sm-inline">Add Blog</span></a>
+                <a href="/AddBlog" ><span class="ms-1 d-none d-sm-inline">Add Blog</span></a>
             </li>
             {% endif %}
             <li class="nav-item">
-                <a href="/blog/blogspage" >All blogs</a>
+                <a href="/blogspage" >All blogs</a>
             </li>
             <li class="nav-item">
-                <a href="/blog/bloggers">All bloggers</a>
+                <a href="/bloggers">All bloggers</a>
             </li> 
         </ul>
             

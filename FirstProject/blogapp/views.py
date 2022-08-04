@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 from django.utils import timezone
-from .models import UserForm, BlogForm
+from .forms import UserForm, BlogForm
 from .models import users, blogs, comment  
 from django.core.paginator import Paginator
 
@@ -25,7 +25,7 @@ def RegistrationPage(request):
         data = UserForm(request.POST,request.FILES)
         if data.is_valid():   
             data.save()
-            return redirect('/blog/loginpage')
+            return redirect('/loginpage')
     return render(request,'registration.html',{'frm':frm})
 
 def loginpage(request):

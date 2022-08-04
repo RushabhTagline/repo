@@ -46,7 +46,7 @@
             </tr>
             {% for x in page_obj %}
             <tr align="center" class="tr-set">
-                <td><a href="/blog/blogdetails/{{x.id}}">{{x.title}}</a></td>
+                <td><a href="/blogdetails/{{x.id}}">{{x.title}}</a></td>
                 <td>{{x.UserId}}</td>
                 <td>{{x.created_date}}</td>
                 <td><img src="/media/{{x.image}}" class="image-set" alt=""></td>

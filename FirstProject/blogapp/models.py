@@ -1,7 +1,6 @@
 from pyexpat import model
 from django.utils import timezone
 from django.db import models
-from django.forms import ModelForm
 
 # Create your models here.
 
@@ -34,15 +33,7 @@ class comment(models.Model):
         return self.Comment[:75]
 
 
-class UserForm(ModelForm):
-    class Meta:
-        model = users
-        fields = ["FirstName","LastName","UserMail","Password","image"]
 
-class BlogForm(ModelForm):
-    class Meta:
-        model = blogs
-        fields = ["title","sub_title","description","image","UserId"]
         
 
 

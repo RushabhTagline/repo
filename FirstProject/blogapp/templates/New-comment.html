@@ -9,7 +9,7 @@
 <body>
     <div><a href="/blog">Home</a></div>
     {% if msg %}
-    <p>{{msg}}<a href="/blog/loginpage"> Login</a></p>
+    <p>{{msg}}<a href="/loginpage"> Login</a></p>
     {% else %}
     <form action="" method="post">
         {% csrf_token %}
