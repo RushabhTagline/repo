@@ -10,4 +10,11 @@ urlpatterns = [
     path('ragi/',views.RegistrationPage,name='RegistrationPage'),
     path('Logout/',views.logout,name='logout'),
     path('blogspage/',views.Blogspage,name='Blogspage'),
+    path('AddBlog/',views.AddNewBlog,name='AddNewBlog'),
+    path('blogdetails/<int:blog_id>',views.BlogDetailsPage,name='BlogDetailsPage'),
+    path('AuthorDetailsPage/<int:pk>',views.AuthorDetailsPage,name='AuthorDetailsPage'),
+    path('bloggers/',views.BloggersPage,name='BloggersPage'),
+    path('addcomment/<int:blog_id>',views.addcomment,name='addcomment'),
+    path('verificationpage/<str:email>',views.VerificationPage,name="VerificationPage"),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

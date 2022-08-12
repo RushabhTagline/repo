@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .image-set{
+            height: 55px;
+            width: 60px;          
+        }
+    </style>
+</head>
+<body>
+    <div><a href="/blog">Home</a></div>
+    <table border="1" style="text-align: center;">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>image</th>
+        </tr>
+        {% for x in bloggers %}
+        <tr>
+            <td><a href="/AuthorDetailsPage/{{x.id}}">{{x.FirstName}} {{x.LastName}}</a></td>
+            <td>{{x.UserMail}}</td>
+            <td><img src="/media/{{x.image}}" alt="" class="image-set"></td>
+        </tr>
+        {% endfor %}                                                                                                   
+    </table>
+    
+</body>
+</html>

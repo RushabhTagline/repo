@@ -26,15 +26,15 @@
                 <div class="row gx-lg-5 align-items-center">    
                     <div class="col-lg-6 mb-5 mb-lg-0">
                         <div class="card">
-                            <div class="card-body py-5 px-md-5">
+                            <div class="card-body py-5 px-md-5"> <b>Add new Blog</b>
                                 <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="demo">
-                                        <table>{{frm}}</table>
+                                        <table>{{frm.as_table}}</table>
                                     </div>
                                     <!-- Submit button -->
                                     <div class="button">
-                                        <button type="submit" class="btn btn-primary btn-block mb-4" name="save">Sign up</button>
+                                        <button type="submit" class="btn btn-primary btn-block mb-4" name="save">Save</button>
                                     </div>
                                 </form>
                             </div>
