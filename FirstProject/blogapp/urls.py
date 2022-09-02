@@ -18,3 +18,4 @@ urlpatterns = [
     path('verificationpage/<str:email>',views.VerificationPage,name="VerificationPage"),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    

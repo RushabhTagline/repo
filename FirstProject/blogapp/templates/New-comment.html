@@ -12,7 +12,7 @@
     <p>{{msg}}<a href="/loginpage"> Login</a></p>
     {% else %}
     <form action="" method="post">
-        {% csrf_token %}
+        {% csrf_token %}    
         <div>
             <label for="for_comment">Comment </label>
             <input type="text" name="CommentInput" placeholder="Add New Comment">
