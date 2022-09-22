@@ -11,7 +11,7 @@ class users(models.Model):
     Password = models.CharField(max_length=15)
     image = models.FileField()
     otp = models.IntegerField(blank=True,null=True)
-    def __str__(self):
+    def __str__(self): 
         return self.FirstName   
 
 class blogs(models.Model):
